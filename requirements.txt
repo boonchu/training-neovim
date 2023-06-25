@@ -1,0 +1,13 @@
+exceptiongroup==1.1.1
+flake8==6.0.0
+greenlet==2.0.2
+iniconfig==2.0.0
+mccabe==0.7.0
+msgpack==1.0.5
+packaging==23.1
+pluggy==1.2.0
+pycodestyle==2.10.0
+pyflakes==3.0.1
+pynvim==0.4.3
+pytest==7.4.0
+tomli==2.0.1
