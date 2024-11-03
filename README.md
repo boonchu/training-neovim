@@ -9,12 +9,13 @@ https://alpha2phi.medium.com/8-new-neovim-plugins-to-try-e221a3c2279c
 https://www.youtube.com/watch?v=Mtgo-nP_r8Y
 
 https://martinlwx.github.io/en/config-neovim-from-scratch/
-
+```
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-
+```
 space -> t -> h to change theme
 
 * syntax highlight (install via vim prompt)
+  
 :TSInstall elixir
 :TSInstallInfo
 :TSInstall terraform
@@ -36,6 +37,7 @@ space -> t -> h to change theme
 
 * customization with lua
 
+```
 $ tree ~/.config/nvim/
 /home/bigchoo/.config/nvim/
 ├── LICENSE
@@ -70,16 +72,18 @@ $ tree ~/.config/nvim/
         │   ├── telescope.lua
         │   └── treesitter.lua
         └── init.lua
+```
 
- edit ~/.config/nvim/lua/custom/plugins.lua
+* edit ~/.config/nvim/lua/custom/plugins.lua
+
   Appends 'vim-crystal/vim-crystal',
   Use ':Lazy sync' to sync plugins
 
-* *-language-server
+* `*-language-server`
 ensure to install 'rust_analyzer' with Mason
 
 - edit ~/.config/nvim/lua/custom/plugins.lua
-
+```
 󰌵 50   {       Line with postspace.
   51   │ "vim-crystal/vim-crystal",
   52   │ ft = "crystal",
@@ -87,16 +91,16 @@ ensure to install 'rust_analyzer' with Mason
   54   │ │ vim.g.crystal_auto_format = 1
   55   │ end
   56   },
-
+```
 - edit ~/.config/nvim/lua/custom/configs/lspconfig.lua
-
+```
   16 lspconfig.rust_analyzer.setup({
   17   on_attach = on_attach,
   18   capabilities = capabilities,
   19   filetypes = {"rust"},
   20   root_dir = lspconfig.util.root_pattern("Cargo.toml"),
   21 })
-
+```
 ###### Lunar VIM ######
 
 https://www.lunarvim.org/docs/installation
