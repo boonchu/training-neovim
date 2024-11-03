@@ -1,0 +1,5 @@
+https://www.anaconda.com/download#downloads
+
+https://www.how2shout.com/how-to/install-anaconda-wsl-windows-10-ubuntu-linux-app.html
+
+wget https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh

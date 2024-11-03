@@ -1,0 +1,210 @@
+#### NeoVim PDE ####
+https://alpha2phi.medium.com/neovim-pde-c-c-go-python-and-rust-35fe86c3517d
+
+git clone https://github.com/alpha2phi/neovim-pde.git
+brew install stow
+cd neovim-pde
+./install.sh
+
+NDE_APP_NAME=nvim-pde
+alias nde="NVIM_APPNAME=$NDE_APP_NAME nvim"
+
+#### NvChad ####
+https://www.youtube.com/watch?v=4BnVeOUeZxc
+
+- git clone https://github.com/NvChad/NvChad.git --depth 1 nvc
+- rsync -a nvc ~/.config
+- cd nvc
+- create two files
+
+-- install.sh --
+
+#!/bin/sh
+
+NVC_APP_NAME=nvc
+NVC_APP_CONFIG=~/.config/$NVC_APP_NAME
+export NVC_APP_NAME NVC_APP_CONFIG
+
+rm -rf $NVC_APP_CONFIG && mkdir -p $NVC_APP_CONFIG
+
+stow --restow --target=$NVC_APP_CONFIG .
+
+alias nvc="NVIM_APPNAME=$NVC_APP_NAME nvim"
+
+-- nvc --
+#!/usr/bin/sh
+
+NVC_APP_NAME=nvc
+alias nvc="NVIM_APPNAME=$NVC_APP_NAME nvim"
+nvc $*
+
+- run ./install.sh
+- run ./nvc .
+- wait until sync done and say (((NO))) to prompt
+- select 'SPACE t h' to find the favorite theme color
+
+################# pyright #####################
+
+- install autocompletion with pyright
+
+pip3 install pyright
+npm i pyright
+
+- install mason.nvim for supportting plugins
+- select 'SPACE e' to enable file tree explorer
+- select lua/custom and press 'a' to create 'new' file name 'plugins.lua'
+
+-- lua/custom/plugins.lua --
+
+local plugins = {
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "pyright",
+      }
+    }
+  },
+}
+return plugins
+
+-- lua/custom/chadrc.lua --
+
+local M = {}
+M.ui = {theme = 'catppuccin'}
+M.plugins = "custom.plugins"
+return M
+
+- exit NeoVim
+- run ./nvc
+- prompt :MasonInstallAll
+
+- install 'lsp - Language Server'
+- select 'SPACE e' 
+- update lua/custom/plugins.lua
+
+local plugins = {
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "pyright",
+      }
+    }
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function ()
+      require "plugins.configs.lspconfig"
+      require "custom.configs.lspconfig"
+    end
+  }
+}
+return plugins
+
+- select 'SPACE e'
+- select lua/custom and press 'a' to create 'new' file name 'configs/lspconfig.lua'
+
+-- lua/custom/configs/lspconfig.lua --
+
+local config = require("plugins.configs.lspconfig")
+
+local on_attach = config.on_attach
+
+local capabilities = config.capabilities
+
+local lspconfig = require(
+  "lspconfig"
+)
+
+lspconfig.pyright.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {"python"},
+})
+
+- play with pyright autocompletion
+- open prime.py
+
+- Verify LSP with ':LspInfo'
+
+################# lint #####################
+
+- ./nvc .
+- select 'SPACE e'
+- edit lua/custom/plugins.lua
+
+-- lua/custom/plugins.lua --
+
+local plugins = {
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    ft = {"python"},
+    opts = function()
+      return require("custom.configs.null-ls")
+    end,
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "mypy",
+        "ruff",
+        "pyright",
+      }
+    }
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function ()
+      require "plugins.configs.lspconfig"
+      require "custom.configs.lspconfig"
+    end
+  }
+}
+return plugins
+
+- install pip package 
+
+pip3 install mypy ruff
+
+- create new file 'lua/custom/configs/null-ls.lua'
+
+-- lua/custom/configs/null-ls.lua --
+
+local null_ls = require("null-ls")
+
+local opts = {
+  sources = {
+    null_ls.builtins.diagnostics.mypy,
+    null_ls.builtins.diagnostics.ruff,
+  }
+}
+return opts
+
+################# auto formatting #####################
+
+- install pip package 
+
+pip3 install black
+
+- edit lua/custom/plugins.lua
+
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "black",
+        "mypy",
+        "ruff",
+        "pyright",
+      }
+    }
+
+- edit lua/custom/configs/null-ls.lua
+
+local opts = {
+  sources = {
+    null_ls.builtins.diagnostics.black,
+    null_ls.builtins.diagnostics.mypy,
+    null_ls.builtins.diagnostics.ruff,
+  }

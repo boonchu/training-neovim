@@ -1,0 +1,69 @@
+### TF links ###
+
+ * https://techblog.flaviusdinu.com/
+ * https://spacelift.io/blog/terraform-commands-cheat-sheet
+
+### NEOVIM TERRAFORM ###
+
+ * https://www.mukeshsharma.dev/2022/02/08/neovim-workflow-for-terraform.html
+
+### NEOVIM TREESITTER Highlight ###
+
+ * https://github.com/nvim-treesitter/nvim-treesitter#modules
+
+### NEOVIM LSP (Language Server Protocol) ###
+
+ * https://github.com/hashicorp/terraform-ls/blob/main/docs/USAGE.md
+
+> brew install hashicorp/tap/terraform-ls
+> brew install tflint
+
+> Download terraform-lsp binary https://github.com/juliosueiras/terraform-lsp/releases/
+  * https://asciinema.org/a/245075
+
+> ~/.config/nvim/lua/custom/plugins.lua
+
+   25   -- override plugin configs
+   26   {
+   27   │ "hashicorp/terraform-ls",
+   28   },
+   29
+   30   {
+   31   │ "juliosueiras/terraform-lsp",
+   32   },
+
+
+Check LSP Language Support for terraform
+
+:help lspconfig-all
+/terraform
+
+- Override LSP parameters
+
+> ~/.config/nvim/lua/custom/configs/overrides.lua
+
+# Check when terraform module installed
+:TSModuleInfo terraform
+/terraform
+
+- Loading LSP
+
+> ~/.config/nvim/lua/custom/configs/lspconfig.lua
+
+-- if you just want default config for the servers then put them in a table
+local servers = { "html", "cssls", "tsserver", "clangd", "terraformls", "tflint", "terraform_lsp" }
+
+Install hcl grammar
+- https://github.com/nvim-treesitter/nvim-treesitter
+
+:TSInstall terraform
+:TSInstall hcl
+
+Run
+:LspInstall
+
+Log 
+:LspLog
+
+Info (open main.tf before using Info)
+:LspInfo

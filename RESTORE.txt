@@ -1,0 +1,3 @@
+# RESTORE neo-vim
+
+cd && tar xvfpz training-nvim/current-settings.tgz

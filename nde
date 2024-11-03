@@ -1,0 +1,8 @@
+#!/usr/bin/sh
+
+# how to use terminal
+# https://alpha2phi.medium.com/neovim-101-terminal-2ccd5ff66ddd
+
+NDE_APP_NAME=nvim-pde
+alias nde="NVIM_APPNAME=$NDE_APP_NAME nvim"
+nde $*
