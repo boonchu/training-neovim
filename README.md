@@ -1,5 +1,14 @@
 ###### NeoVIM #####
+# - neovim-pde for beginner
+https://alpha2phi.medium.com/learn-neovim-the-practical-way-8818fcf4830f#ce0a
+# - neovim-modern for advance user
+https://alpha2phi.medium.com/8-new-neovim-plugins-to-try-e221a3c2279c
+# - nvcad 
+> git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && git clone https://github.com/PatrickKoss/NvChad-Custom-Config.git ~/.config/nvim/lua/custom --depth 1 && nvim
+
 https://www.youtube.com/watch?v=Mtgo-nP_r8Y
+
+https://martinlwx.github.io/en/config-neovim-from-scratch/
 
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 
@@ -162,3 +171,25 @@ cp -r minimal-nvim/lvim ~/.config/lvim
 
 - changing color scheme <space> s -> p
 - using previous open file <space> Shift S -> s
+
+$ tree ~/.config/lvim/lua/user/
+/home/bigchoo/.config/lvim/lua/user/
+├── autocmds.lua
+├── banners.lua  <-- random banner after exec vim
+├── colorscheme.lua
+├── dashboard.lua
+├── filetype.lua
+├── keymaps.lua <--- key mappings
+├── kind.lua
+├── lsp.lua <--- langauge server using 'tsserver' (typescript)
+├── options.lua <--- vim options
+├── plugins.lua
+├── statusline.lua
+└── which-key.lua
+
+- enable with terminal vsp|te or sp|te
+
+lab5: rolling release
+
+https://www.youtube.com/watch?v=NlRxRtGpHHk
+# training-neovim
